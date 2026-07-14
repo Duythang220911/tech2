@@ -1287,7 +1287,7 @@ margin-top: 36px;
     width: 100%;
 
     height: calc(
-        35px +
+        38px +
         env(safe-area-inset-bottom)
     );
 
