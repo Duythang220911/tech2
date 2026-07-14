@@ -28,7 +28,7 @@ body {
     overflow: hidden;
 
     /* Màu dự phòng giống phần cuối ảnh nền */
-    background: #dce8df;
+   background: #000000;
 }
 
 body {
@@ -58,7 +58,7 @@ body {
 
     overflow: hidden;
 
-    background: #dce8df;
+   background: #000000;
 }
 
 /* Nền kéo xuống phủ cả safe-area phía dưới */
