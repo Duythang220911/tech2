@@ -12,48 +12,54 @@
              viewport-fit=cover"
 >
 
+<!-- PWA -->
+<meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+>
 
+<meta
+    name="mobile-web-app-capable"
+    content="yes"
+>
 
 <meta
     name="apple-mobile-web-app-status-bar-style"
     content="black-translucent"
 >
 
-    <title>Đăng nhập</title>
+<meta
+    name="apple-mobile-web-app-title"
+    content="TCB Demo"
+>
 
-    <!-- PWA -->
-    <link rel="manifest" href="./manifest.json">
+<meta
+    name="theme-color"
+    content="#f8f2ef"
+>
 
-    <link
-        rel="apple-touch-icon"
-        href="./img/tech.jpg"
-    >
+<title>Đăng nhập</title>
 
-    <meta
-        name="mobile-web-app-capable"
-        content="yes"
-    >
+<link
+    rel="manifest"
+    href="./manifest.json"
+>
 
-    <meta
-        name="apple-mobile-web-app-title"
-        content="TCB Demo"
-    >
+<link
+    rel="apple-touch-icon"
+    href="./img/tech.jpg"
+>
 
-    <meta
-        name="theme-color"
-        content="#f8f2ef"
-    >
+<!-- Boxicons -->
+<link
+    href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+    rel="stylesheet"
+>
 
-    <!-- Boxicons -->
-    <link
-        href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-        rel="stylesheet"
-    >
-
-    <link
-        rel="stylesheet"
-        href="./css/login.css"
-    >
+<link
+    rel="stylesheet"
+    href="./css/login.css"
+>
 </head>
 
 <body>
@@ -163,6 +169,37 @@
     </main>
 
     <script>
+        function updateAppHeight() {
+    const height = window.innerHeight;
+
+    document.documentElement.style.setProperty(
+        "--app-height",
+        `${height}px`
+    );
+}
+
+updateAppHeight();
+
+window.addEventListener(
+    "resize",
+    updateAppHeight
+);
+
+window.addEventListener(
+    "orientationchange",
+    () => {
+        setTimeout(updateAppHeight, 150);
+    }
+);
+
+document.addEventListener(
+    "visibilitychange",
+    () => {
+        if (!document.hidden) {
+            setTimeout(updateAppHeight, 100);
+        }
+    }
+);
     const loginButton =
         document.getElementById("loginButton");
 
