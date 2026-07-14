@@ -1128,7 +1128,7 @@ margin-top: 36px;
     right: 0;
     top: calc(454px + env(safe-area-inset-top));
     height: 240px;
-       margin-top: 53px;
+    margin-top: 50px;
     padding: 12px 15px 18px;
     border-radius: 18px 18px 0 0;
     background: #ffffff;
