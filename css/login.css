@@ -15,9 +15,9 @@
    IOS PWA FULL SCREEN — KHÔNG HỞ ĐÁY
 ========================================= */
 
-:root {
-    --app-height: 100vh;
-}
+/* =========================================
+   IOS HOME SCREEN — FULL BACKGROUND
+========================================= */
 
 * {
     margin: 0;
@@ -31,28 +31,27 @@ html {
     width: 100%;
     height: 100%;
 
-    /*
-      QUAN TRỌNG:
-      Nếu iOS làm lộ canvas ngoài .login-app,
-      chính ảnh nền vẫn tiếp tục hiển thị.
-    */
-    background-image: url("../img/login.jpg");
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-size: cover;
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
 }
 
 body {
+    position: fixed;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
     width: 100%;
-    height: var(--app-height);
-    min-height: var(--app-height);
+    height: 100%;
 
     margin: 0;
     padding: 0;
 
     overflow: hidden;
-
-    background: transparent;
 
     font-family:
         -apple-system,
@@ -61,87 +60,66 @@ body {
         "SF Pro Text",
         Arial,
         sans-serif;
+
+    color: #080808;
 }
 
-/* Khung ứng dụng */
+/* Khung ứng dụng phủ toàn bộ vùng iOS */
 .login-app {
     position: fixed;
     z-index: 0;
 
     top: 0;
+    right: 0;
+
+    /*
+      Kéo app vượt khỏi đáy màn hình thật.
+      Không dùng 100svh.
+    */
+    bottom: -150px;
+
     left: 0;
 
     width: 100%;
+    height: auto;
 
-    /*
-      Kéo khung vượt xuống dưới để che cả vùng đáy iOS.
-    */
-    height: calc(
-        var(--app-height) +
-        env(safe-area-inset-bottom) +
-        80px
-    );
-
+    min-height: calc(100dvh + 150px);
     max-width: none;
 
     margin: 0;
     padding: 0;
 
     overflow: hidden;
-
-    background: transparent;
 }
 
-/* Khung chứa ảnh */
+/*
+  Nền là background-image thật,
+  không dùng màu để che dải trắng.
+*/
 .login-background {
     position: absolute;
     z-index: 0;
 
     top: 0;
+    right: 0;
+    bottom: 0;
     left: 0;
 
-    width: 100%;
-    height: calc(
-        var(--app-height) +
-        env(safe-area-inset-bottom) +
-        80px
-    );
-
-    overflow: hidden;
+    background-image: url("../img/login.jpg");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: cover;
 }
 
-/* Ảnh thật được kéo dài xuống */
-.login-background img {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-    object-position: center bottom;
-
-    transform: scale(1.015);
-    transform-origin: center bottom;
-}
-
+/* Lớp phủ */
 .background-overlay {
     position: absolute;
     z-index: 1;
 
     top: 0;
+    right: 0;
+    bottom: 0;
     left: 0;
-
-    width: 100%;
-    height: calc(
-        var(--app-height) +
-        env(safe-area-inset-bottom) +
-        80px
-    );
 
     pointer-events: none;
 
@@ -589,8 +567,8 @@ img {
 
 
 .bottom-services {
-    position: absolute;
-    z-index: 2;
+    position: fixed;
+    z-index: 3;
 
     left: 0;
     right: 0;
@@ -807,10 +785,13 @@ img {
     }
 
     .login-app {
+        left: 50%;
+
         width: 430px;
         max-width: 430px;
 
-        /* Không thêm height: 100svh ở đây */
+        transform: translateX(-50%);
+
         box-shadow:
             0 0 32px
             rgba(0, 0, 0, 0.12);
