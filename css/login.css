@@ -596,8 +596,7 @@ img {
     left: 0;
     right: 0;
 
-       bottom: calc(-176px + env(safe-area-inset-bottom));
-
+            bottom: calc(-220px + env(safe-area-inset-bottom));
     width: 100%;
     height: auto;
 
