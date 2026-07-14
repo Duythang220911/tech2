@@ -1296,7 +1296,7 @@ margin-top: 36px;
       Safe area được cộng thêm phía dưới.
     */
     height: calc(
-         30px +
+         -50px +
         env(safe-area-inset-bottom)
     );
 
