@@ -14,12 +14,14 @@
 /* =========================================
    FIX FULL SCREEN IPHONE + XÓA DẢI TRẮNG ĐÁY
 ========================================= */
+/* =========================================
+   FULL SCREEN IOS — KHÔNG HỞ TRẮNG PHÍA DƯỚI
+========================================= */
 
 html,
 body {
     width: 100%;
     height: 100%;
-    min-height: 100%;
 
     margin: 0;
     padding: 0;
@@ -31,18 +33,35 @@ body {
     position: fixed;
     inset: 0;
 
-    display: block;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        Arial,
+        sans-serif;
+
+    color: #080808;
 }
 
-/* Khung chính luôn phủ toàn bộ màn hình */
+/*
+  QUAN TRỌNG:
+  Dùng inset: 0 thì không đặt height: 100svh nữa.
+*/
 .login-app {
     position: fixed;
-    inset: 0;
+    z-index: 0;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 
     width: 100%;
-    height: 100svh;
-    min-height: 100svh;
 
+    /* Xóa giới hạn chiều cao cũ */
+    height: auto;
+    min-height: 0;
     max-width: none;
 
     margin: 0;
@@ -51,36 +70,50 @@ body {
     overflow: hidden;
 }
 
-/* Ảnh nền phủ toàn bộ cả chiều cao */
+/*
+  Kéo khung ảnh vượt xuống dưới màn hình,
+  bảo đảm che cả vùng home indicator của iPhone.
+*/
 .login-background {
     position: absolute;
-    inset: 0;
+    z-index: 0;
 
-    width: 100%;
-    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    bottom: -120px;
 
     overflow: hidden;
 }
 
 .login-background img {
     position: absolute;
-    inset: 0;
+
+    top: 0;
+    left: 0;
+
+    display: block;
 
     width: 100%;
-    height: 100%;
+    height: calc(100% + 120px);
 
     object-fit: cover;
     object-position: center bottom;
 
-    transform: scale(1.02);
-    transform-origin: center bottom;
+    transform: none;
 }
-/* Overlay cũng phải phủ kín */
+
+/* Overlay cũng kéo xuống giống ảnh nền */
 .background-overlay {
     position: absolute;
     z-index: 1;
 
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    bottom: -120px;
 
     pointer-events: none;
 
@@ -745,6 +778,7 @@ img {
     body {
         display: flex;
         justify-content: center;
+
         background: #ebebeb;
     }
 
@@ -754,8 +788,8 @@ img {
         width: 430px;
         max-width: 430px;
 
-        height: 100svh;
-        min-height: 100svh;
+        height: 100dvh;
+        min-height: 100dvh;
 
         box-shadow:
             0 0 32px
