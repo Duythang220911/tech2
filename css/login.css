@@ -83,11 +83,9 @@ body {
     left:0;
 
     width:100%;
-    height:calc(100% + env(safe-area-inset-bottom));
+    height:calc(100% + 80px);
 
     object-fit:cover;
-
-    /* ưu tiên giữ phần dưới của ảnh */
     object-position:center bottom;
 }
 
