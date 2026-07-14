@@ -113,7 +113,7 @@ html, body {
 
 /* Đặt màu nền trùng màu ảnh cho html/body để nếu có hở cũng không thấy trắng */
 html, body {
-  background-color: #b8dfc3; /* lấy màu chủ đạo của ảnh nền */
+  background-color: #cdd9cf; /* lấy màu chủ đạo của ảnh nền */
 }
 /*
   Nền là background-image thật,
