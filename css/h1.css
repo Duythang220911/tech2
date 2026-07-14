@@ -1233,15 +1233,6 @@ margin-top: 36px;
 
 
 /* Cấu trúc của từng nút điều hướng */
-.nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 1;
-    text-decoration: none;
-    text-align: center;
-    position: relative;
-}
 
 /* Căn chỉnh kích thước của các Icon ảnh */
 .nav-icon {
@@ -1281,6 +1272,10 @@ margin-top: 36px;
    BOTTOM NAV IOS SAFE AREA
 ========================= */
 
+/* =========================================
+   BOTTOM NAV — 5 Ô CỐ ĐỊNH, ẢNH TÁCH RIÊNG
+========================================= */
+
 .bottom-nav-container {
     position: fixed;
     z-index: 9999;
@@ -1291,25 +1286,17 @@ margin-top: 36px;
 
     width: 100%;
 
-    /*
-      90px là phần menu.
-      Safe area được cộng thêm phía dưới.
-    */
     height: calc(
-         -50px +
+        68px +
         env(safe-area-inset-bottom)
     );
 
-    padding:
-        0
-        0
-        env(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
 
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
 
-    box-sizing: border-box;
+    overflow: hidden;
 
     background: #ffffff;
 
@@ -1317,55 +1304,131 @@ margin-top: 36px;
         0 -2px 10px
         rgba(0, 0, 0, 0.05);
 }
-/* Ô chứa từng nút */
+
+/* Mỗi ô luôn chiếm đúng 1/5 màn hình */
 .nav-item {
     position: relative;
 
-    flex: 1;
-
-    height: 90px;
+    width: 100%;
+    min-width: 0;
+    height: 68px;
 
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+
+    overflow: visible;
 
     text-decoration: none;
 }
 
-/* Class chung cho tất cả các Icon */
+/* Khung cố định, không thay đổi layout */
+.nav-icon-box {
+    position: relative;
+
+    width: 74px;
+    height: 64px;
+
+    display: block;
+
+    overflow: visible;
+}
+
+/* Ảnh tách khỏi layout */
 .nav-icon {
-    display: block !important;
-    height: auto !important; /* Giữ nguyên tỷ lệ hình ảnh, không bị móp */
-    object-fit: contain !important;
-    /* XÓA BỎ HOÀN TOÀN max-width % Ở ĐÂY ĐỂ TRÁNH BỊ BÓP LAYOUT */
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    max-width: none;
+
+    object-fit: contain;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+
+    transform-origin: center;
+
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Gạch đỏ tab active */
+.nav-item.active::before {
+    content: "";
+
+    position: absolute;
+    z-index: 2;
+
+    top: 0;
+    left: 12%;
+    right: 12%;
+
+    height: 3px;
+
+    background: #d71921;
 }
 
 /* --- BÂY GIỜ BẠN THOẢI MÁI ĐIỀN CỠ PX VÀO ĐÂY MÀ KHÔNG BỊ PHÁ LAYOUT --- */
+/* Trang chủ */
 .icon-home {
- width: 48px !important;
-    margin-left: 10px;
-    margin-top: -15px;
+       width: 143px;
+    margin-top: -19px;
+    margin-left: 5px;
+    transform:
+        translate(-50%, -50%)
+        translateY(0)
+        scale(1);
 }
 
+/* Tài khoản & Thẻ */
 .icon-account {
-   width: 68px !important;
-    margin-top: 23px;
-        margin-left: -10px;
+    width: 150px;
+    margin-top: -3px;
+    transform:
+        translate(-50%, -50%)
+        translateY(1px)
+        scale(1);
 }
 
+/* Chuyển tiền */
 .icon-transfer {
-      width: 70px !important;
-    margin-top: 9px;
+        width: 145px;
+    margin-top: -7px;
+    transform:
+        translate(-50%, -50%)
+        translateY(0)
+        scale(1);
+    
 }
 
+/* Techcombank OneU */
 .icon-oneu {
-    width: 50px !important;
-    margin-top: -5px;
+         width: 139px;
+    margin-top: -14px;
+
+    transform:
+        translate(-50%, -50%)
+        translateY(0)
+        scale(1);
 }
 
+/* Tổng quan tài sản */
 .icon-assets {
-      width: 70px !important;
-    margin-top: 11px;
+        width: 145px;
+    margin-top: -7px;
+    transform:
+        translate(-50%, -50%)
+        translateY(0)
+        scale(1);
 }
 /* --------------------------------------------------------------------- */
 
