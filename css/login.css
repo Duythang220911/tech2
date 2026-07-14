@@ -11,123 +11,102 @@
 }
 
 
-/* =========================================
-   FIX FULL SCREEN IPHONE + XÓA DẢI TRẮNG ĐÁY
-========================================= */
-/* =========================================
-   FULL SCREEN IOS — KHÔNG HỞ TRẮNG PHÍA DƯỚI
-========================================= */
 
-html,
-body {
-    width: 100%;
-    height: 100%;
 
+/* =========================
+   RESET & FIX FULL SCREEN
+========================= */
+
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
 
+html {
+    width: 100%;
+    /* Sử dụng dvh (Dynamic Viewport Height) để tính chính xác cả phần tai thỏ/thanh đáy iOS */
+    height: 100dvh; 
     overflow: hidden;
 }
 
 body {
+    width: 100%;
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    
+    /* Gom 2 khai báo cũ làm 1 */
     position: fixed;
     inset: 0;
+    display: flex;
+    justify-content: center;
 
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "SF Pro Display",
-        "SF Pro Text",
-        Arial,
-        sans-serif;
-
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Arial, sans-serif;
     color: #080808;
+    
+    /* Đảm bảo nền của body không đè lên ảnh nền */
+    background-color: transparent; 
 }
 
-/*
-  QUAN TRỌNG:
-  Dùng inset: 0 thì không đặt height: 100svh nữa.
-*/
+/* Khung chính luôn phủ toàn bộ màn hình */
 .login-app {
     position: fixed;
-    z-index: 0;
-
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-
+    inset: 0;
     width: 100%;
-
-    /* Xóa giới hạn chiều cao cũ */
-    height: auto;
-    min-height: 0;
+    /* Mở rộng tuyệt đối ra vùng an toàn ở đáy */
+    height: 100dvh; 
     max-width: none;
-
     margin: 0;
     padding: 0;
-
     overflow: hidden;
 }
 
-/*
-  Kéo khung ảnh vượt xuống dưới màn hình,
-  bảo đảm che cả vùng home indicator của iPhone.
-*/
+/* Ảnh nền phủ toàn bộ cả chiều cao */
 .login-background {
     position: absolute;
-    z-index: 0;
-
+    /* Ép sát cả 4 góc bao gồm cả vùng thanh điều hướng iOS */
     top: 0;
     left: 0;
     right: 0;
-
-    bottom: -120px;
-
+    bottom: 0; 
+    width: 100%;
+    height: 100%;
     overflow: hidden;
+    z-index: 0;
 }
 
 .login-background img {
     position: absolute;
-
     top: 0;
     left: 0;
-
-    display: block;
-
     width: 100%;
-    height: calc(100% + 120px);
-
-    object-fit: cover;
-    object-position: center bottom;
-
-    transform: none;
+    height: 100%;
+    
+    /* Quan trọng: cover sẽ tự động kéo giãn ảnh full màn hình không để lại khoảng trắng */
+    object-fit: cover; 
+    object-position: center center; /* Thay đổi thành center để ảnh cân đối khi kéo full */
+    
+    /* Tăng nhẹ scale lên một chút nếu ảnh của bạn vẫn bị hụt mép */
+    transform: scale(1.05); 
+    transform-origin: center center;
 }
 
-/* Overlay cũng kéo xuống giống ảnh nền */
+/* Overlay cũng phải phủ kín */
 .background-overlay {
     position: absolute;
     z-index: 1;
-
-    top: 0;
-    left: 0;
-    right: 0;
-
-    bottom: -120px;
-
+    inset: 0;
     pointer-events: none;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255, 249, 246, 0.08) 0%,
-            rgba(255, 250, 245, 0.02) 45%,
-            rgba(188, 222, 204, 0.14) 100%
-        );
+    background: linear-gradient(
+        180deg,
+        rgba(255, 249, 246, 0.08) 0%,
+        rgba(255, 250, 245, 0.02) 45%,
+        rgba(188, 222, 204, 0.14) 100%
+    );
 }
-
-
-
 body {
     display: flex;
     justify-content: center;
