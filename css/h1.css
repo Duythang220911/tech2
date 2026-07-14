@@ -11,19 +11,15 @@
 }
 
 html,
-body{
-    width:100%;
-    height:100%;
-    margin:0;
-    padding:0;
-    overflow:hidden;
-    background:#eef3ed;
+body {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #ffffff !important;
 }
-
-html {
-    background: #eeeeee;
-}
-
 body {
     display: block;
     justify-content: center;
@@ -31,8 +27,7 @@ body {
     overflow: hidden;
 
     color: #111111;
-    background: #eeeeee;
-
+   
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -61,30 +56,60 @@ img {
 ========================= */
 
 .home-app {
-    position: relative;
+    position: fixed;
+
+    inset: 0;
 
     width: 100%;
-    max-width: 430px;
-
     height: 100dvh;
     min-height: 100dvh;
 
     overflow: hidden;
-
-  background:#eef3ed;
 }
-.home-app{
-    position:fixed;
-    inset:0;
 
-    width:100%;
-    max-width:none;
+.bottom-nav-container {
+    position: fixed !important;
 
-    height:100vh;
-    min-height:100vh;
+    z-index: 9999 !important;
 
-    overflow:hidden;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+
+    width: 100% !important;
+
+    height:
+        calc(
+            90px +
+            env(safe-area-inset-bottom)
+        ) !important;
+
+    padding:
+        0
+        0
+        env(safe-area-inset-bottom) !important;
+
+    display: flex !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+
+    box-sizing: border-box !important;
+
+    background: #ffffff !important;
 }
+
+.nav-item {
+    flex: 1 !important;
+
+    height: 90px !important;
+
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    position: relative !important;
+}
+
 
 /* =========================
    BACKGROUND
@@ -1205,19 +1230,7 @@ margin-top: 36px;
     background: #ffffff;
 }
 /* Khung chứa thanh điều hướng nằm cố định dưới đáy màn hình */
-.bottom-nav-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #ffffff;
-    display: flex;
-    justify-content: space-around; /* Chia đều khoảng cách giữa 5 nút */
-    align-items: flex-start;
-    padding: 10px 0 15px 0;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05); /* Đổ bóng nhẹ phía trên */
-    z-index: 999;
-}
+
 
 /* Cấu trúc của từng nút điều hướng */
 .nav-item {
@@ -1264,32 +1277,59 @@ margin-top: 36px;
     background-color: #d71921; /* Màu đỏ của Techcombank */
 }
 /* Khung chứa đáy: Định dạng flexbox chuẩn */
-.bottom-nav-container {
-    position: fixed !important;
-    bottom: 0 !important;
-        top: 850px;
-    left: 0 !important;
-    width: 100% !important;
-        height: 90px !important; /* Chiều cao cố định thanh menu */
-    background-color: #ffffff !important;
-    display: flex !important;
-    justify-content: space-around !important; /* Chia đều 5 icon ra toàn màn hình */
-    align-items: center !important; /* Căn giữa icon theo chiều dọc */
-    padding: 0 !important;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05) !important;
-    z-index: 9999 !important;
-    box-sizing: border-box !important;
-}
+/* =========================
+   BOTTOM NAV IOS SAFE AREA
+========================= */
 
+.bottom-nav-container {
+    position: fixed;
+    z-index: 9999;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+
+    /*
+      90px là phần menu.
+      Safe area được cộng thêm phía dưới.
+    */
+    height: calc(
+        90px +
+        env(safe-area-inset-bottom)
+    );
+
+    padding:
+        0
+        0
+        env(safe-area-inset-bottom);
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 -2px 10px
+        rgba(0, 0, 0, 0.05);
+}
 /* Ô chứa từng nút */
 .nav-item {
-    flex: 1 !important; /* Tự động chia đều 5 phần bằng nhau */
-    height: 100% !important;
-    display: flex !important;
-    justify-content: center !important; /* Căn giữa icon theo chiều ngang */
-    align-items: center !important;
-    text-decoration: none !important;
-    position: relative !important;
+    position: relative;
+
+    flex: 1;
+
+    height: 90px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-decoration: none;
 }
 
 /* Class chung cho tất cả các Icon */
@@ -1474,15 +1514,7 @@ margin-top: 36px;
     background: #e31d2b;
 }
 
-.nav-item {
-    min-width: 0;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    color: #5c5c5c;
-}
 
 .nav-item i {
     height: 30px;
