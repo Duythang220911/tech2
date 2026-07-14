@@ -67,7 +67,7 @@ img {
     overflow: hidden;
 }
 
-.bottom-nav-container {
+/* .bottom-nav-container {
     position: fixed !important;
 
     z-index: 9999 !important;
@@ -96,7 +96,7 @@ img {
     box-sizing: border-box !important;
 
     background: #ffffff !important;
-}
+} */
 
 .nav-item {
     flex: 1 !important;
@@ -1296,7 +1296,7 @@ margin-top: 36px;
       Safe area được cộng thêm phía dưới.
     */
     height: calc(
-        30px +
+         30px +
         env(safe-area-inset-bottom)
     );
 
