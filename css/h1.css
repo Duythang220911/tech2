@@ -1267,7 +1267,7 @@ margin-top: 36px;
 .bottom-nav-container {
     position: fixed !important;
     bottom: 0 !important;
-    top: 900px;
+        top: 850px;
     left: 0 !important;
     width: 100% !important;
         height: 90px !important; /* Chiều cao cố định thanh menu */
