@@ -9,30 +9,7 @@
 
     -webkit-tap-highlight-color: transparent;
 }
-html, body {
-  height: 100%;
-  margin: 0;
-}
 
-.app-container {
-  position: fixed;
-  inset: 0;
-  height: 100dvh; /* dynamic viewport height - chuẩn để xử lý thanh Safari động */
-  overflow: hidden;
-}
-
-.background img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Đặt màu nền trùng màu ảnh cho html/body để nếu có hở cũng không thấy trắng */
-html, body {
-  background-color:#cdd9cf; /* lấy màu chủ đạo của ảnh nền */
-}
 
 /* =========================================
    IOS PWA FULL SCREEN — KHÔNG HỞ ĐÁY
@@ -114,7 +91,30 @@ body {
 
     overflow: hidden;
 }
+html, body {
+  height: 100%;
+  margin: 0;
+}
 
+.app-container {
+  position: fixed;
+  inset: 0;
+  height: 100dvh; /* dynamic viewport height - chuẩn để xử lý thanh Safari động */
+  overflow: hidden;
+}
+
+.background img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Đặt màu nền trùng màu ảnh cho html/body để nếu có hở cũng không thấy trắng */
+html, body {
+  background-color: #b8dfc3; /* lấy màu chủ đạo của ảnh nền */
+}
 /*
   Nền là background-image thật,
   không dùng màu để che dải trắng.
@@ -676,14 +676,16 @@ img {
 
     opacity: 0;
     visibility: hidden;
-
     pointer-events: none;
 
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.35);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 
     transition:
-        opacity 0.3s ease,
-        visibility 0.3s ease;
+        opacity 0.28s ease,
+        visibility 0.28s ease;
 }
 
 .transition-layer.show {
