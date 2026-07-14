@@ -11,102 +11,149 @@
 }
 
 
+/* =========================================
+   IOS PWA FULL SCREEN — KHÔNG HỞ ĐÁY
+========================================= */
 
-
-/* =========================
-   RESET & FIX FULL SCREEN
-========================= */
+:root {
+    --app-height: 100vh;
+}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
     -webkit-tap-highlight-color: transparent;
 }
 
 html {
     width: 100%;
-    /* Sử dụng dvh (Dynamic Viewport Height) để tính chính xác cả phần tai thỏ/thanh đáy iOS */
-    height: 100dvh; 
-    overflow: hidden;
+    height: 100%;
+
+    /*
+      QUAN TRỌNG:
+      Nếu iOS làm lộ canvas ngoài .login-app,
+      chính ảnh nền vẫn tiếp tục hiển thị.
+    */
+    background-image: url("../img/login.jpg");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: cover;
 }
 
 body {
     width: 100%;
-    height: 100dvh;
+    height: var(--app-height);
+    min-height: var(--app-height);
+
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    
-    /* Gom 2 khai báo cũ làm 1 */
-    position: fixed;
-    inset: 0;
-    display: flex;
-    justify-content: center;
 
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Arial, sans-serif;
-    color: #080808;
-    
-    /* Đảm bảo nền của body không đè lên ảnh nền */
-    background-color: transparent; 
+    overflow: hidden;
+
+    background: transparent;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        Arial,
+        sans-serif;
 }
 
-/* Khung chính luôn phủ toàn bộ màn hình */
+/* Khung ứng dụng */
 .login-app {
     position: fixed;
-    inset: 0;
+    z-index: 0;
+
+    top: 0;
+    left: 0;
+
     width: 100%;
-    /* Mở rộng tuyệt đối ra vùng an toàn ở đáy */
-    height: 100dvh; 
+
+    /*
+      Kéo khung vượt xuống dưới để che cả vùng đáy iOS.
+    */
+    height: calc(
+        var(--app-height) +
+        env(safe-area-inset-bottom) +
+        80px
+    );
+
     max-width: none;
+
     margin: 0;
     padding: 0;
+
     overflow: hidden;
+
+    background: transparent;
 }
 
-/* Ảnh nền phủ toàn bộ cả chiều cao */
+/* Khung chứa ảnh */
 .login-background {
     position: absolute;
-    /* Ép sát cả 4 góc bao gồm cả vùng thanh điều hướng iOS */
+    z-index: 0;
+
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0; 
+
     width: 100%;
-    height: 100%;
+    height: calc(
+        var(--app-height) +
+        env(safe-area-inset-bottom) +
+        80px
+    );
+
     overflow: hidden;
-    z-index: 0;
 }
 
+/* Ảnh thật được kéo dài xuống */
 .login-background img {
     position: absolute;
+
     top: 0;
     left: 0;
+
+    display: block;
+
     width: 100%;
     height: 100%;
-    
-    /* Quan trọng: cover sẽ tự động kéo giãn ảnh full màn hình không để lại khoảng trắng */
-    object-fit: cover; 
-    object-position: center center; /* Thay đổi thành center để ảnh cân đối khi kéo full */
-    
-    /* Tăng nhẹ scale lên một chút nếu ảnh của bạn vẫn bị hụt mép */
-    transform: scale(1.05); 
-    transform-origin: center center;
+
+    object-fit: cover;
+    object-position: center bottom;
+
+    transform: scale(1.015);
+    transform-origin: center bottom;
 }
 
-/* Overlay cũng phải phủ kín */
 .background-overlay {
     position: absolute;
     z-index: 1;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(
-        180deg,
-        rgba(255, 249, 246, 0.08) 0%,
-        rgba(255, 250, 245, 0.02) 45%,
-        rgba(188, 222, 204, 0.14) 100%
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: calc(
+        var(--app-height) +
+        env(safe-area-inset-bottom) +
+        80px
     );
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 249, 246, 0.08) 0%,
+            rgba(255, 250, 245, 0.02) 45%,
+            rgba(188, 222, 204, 0.14) 100%
+        );
 }
+
 body {
     display: flex;
     justify-content: center;
@@ -288,11 +335,10 @@ img {
     top: 536px;
     margin: 0 auto;
 
-    background: rgba(219, 2, 2, 0.88);
+    background: rgba(255, 255, 255, 0.88);
 
     border-radius: 22px;
 }
-
 
 
 /* ===================================
@@ -758,19 +804,13 @@ img {
     body {
         display: flex;
         justify-content: center;
-
-        background: #16c03b;
     }
 
     .login-app {
-        position: relative;
-
         width: 430px;
         max-width: 430px;
 
-        height: 100dvh;
-        min-height: 100dvh;
-
+        /* Không thêm height: 100svh ở đây */
         box-shadow:
             0 0 32px
             rgba(0, 0, 0, 0.12);
