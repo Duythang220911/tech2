@@ -212,15 +212,15 @@ document.addEventListener(
 
     let toastTimer;
 
-    // loginButton.addEventListener("click", function () {
-    //     this.classList.add("pressed");
+    loginButton.addEventListener("click", function () {
+        this.classList.add("pressed");
 
-    //     transitionLayer.classList.add("show");
+        transitionLayer.classList.add("show");
 
-    //     setTimeout(function () {
-    //         window.location.href = "./key.html";
-    //     }, 300);
-    // });
+        setTimeout(function () {
+            window.location.href = "./key.html";
+        }, 300);
+    });
 
     personalQrButton.addEventListener("click", function () {
         showToast("Mã QR cá nhân đang được mô phỏng");
